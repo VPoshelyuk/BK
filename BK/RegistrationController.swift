@@ -9,20 +9,43 @@
 import Foundation
 import UIKit
 
-class RegistrationController: UIViewController {
+class RegistrationController: UIViewController{
 
     @IBOutlet weak var TV: UIImageView!
     @IBOutlet weak var Movies: UIImageView!
     @IBOutlet weak var Games: UIImageView!
     var thingsToDo: [String] = []
-
+    @IBAction func moveOn(_ sender: Any) {
+        if(!thingsToDo.isEmpty) {
+            self.performSegue(withIdentifier: "toInterests", sender: self)
+        } else {
+            let alertController = UIAlertController(
+                title: "Oops",
+                message: "Please choose at least one category",
+                preferredStyle: .alert
+            )
+            alertController.addAction(UIAlertAction(title: "Gotcha", style: UIAlertAction.Style.default,handler: nil))
+            present(alertController, animated: true, completion: nil)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.isModalInPresentation = true
         for activity in [TV, Movies,Games] {
             let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
             activity!.isUserInteractionEnabled = true
             activity!.addGestureRecognizer(tapGestureRecognizer)
         }
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       guard let destination = segue.destination as? InterestsController else
+       {
+          return
+       }
+       destination.thingsToDo = thingsToDo
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
@@ -38,12 +61,12 @@ class RegistrationController: UIViewController {
             thingsToDo.append(tappedImage.restorationIdentifier!)
         }
     }
-    
-    
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
+    
+    
 
 }
 

@@ -1,4 +1,4 @@
-framework module Pods_BK_BKUITests {
+module Pods_BK_BKUITests {
   umbrella header "Pods-BK-BKUITests-umbrella.h"
 
   export *
