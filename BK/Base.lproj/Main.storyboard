@@ -298,8 +298,28 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="882"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
+                                    <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAJ-mw-2BU">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="0.87843137250000003" blue="0.75294117650000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="barTintColor" red="1" green="0.87843137250000003" blue="0.75294117650000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <items>
+                                            <navigationItem title="Choose your favorite genres" id="w98-7t-Jrs">
+                                                <barButtonItem key="leftBarButtonItem" style="plain" id="cYK-b3-6pb">
+                                                    <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7ct-eS-CZC">
+                                                        <rect key="frame" x="20" y="13" width="92" height="30"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <state key="normal" title="Back"/>
+                                                        <connections>
+                                                            <action selector="backDismiss:" destination="PDy-dH-vTP" eventType="touchUpInside" id="ytD-0P-srr"/>
+                                                        </connections>
+                                                    </button>
+                                                </barButtonItem>
+                                            </navigationItem>
+                                        </items>
+                                    </navigationBar>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zYY-15-h8z">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                        <rect key="frame" x="0.0" y="59" width="414" height="680"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <viewLayoutGuide key="contentLayoutGuide" id="g85-Hi-yWp"/>
                                         <viewLayoutGuide key="frameLayoutGuide" id="YP5-9V-vq1"/>
@@ -314,6 +334,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="5rh-aP-i1f"/>
                     <connections>
+                        <outlet property="navBar" destination="bAJ-mw-2BU" id="6XA-r6-UAV"/>
                         <outlet property="scrollView" destination="zYY-15-h8z" id="waT-au-sk6"/>
                     </connections>
                 </viewController>

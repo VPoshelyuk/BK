@@ -51,15 +51,21 @@ class RegistrationController: UIViewController{
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)
     {
         let tappedImage = tapGestureRecognizer.view as! UIImageView
-        if(thingsToDo.contains(tappedImage.restorationIdentifier!)){
-            tappedImage.layer.borderWidth = 0
-            thingsToDo.remove(object: tappedImage.restorationIdentifier!)
-        }else{
-            tappedImage.layer.cornerRadius = 100
-            tappedImage.layer.borderWidth = 3.0
-            tappedImage.layer.borderColor = CGColor.init(srgbRed: 101/255, green: 155/255, blue: 145/255, alpha: 1.0)
-            thingsToDo.append(tappedImage.restorationIdentifier!)
-        }
+        tappedImage.layer.cornerRadius = 100
+        let translation:[CGFloat] = (tappedImage.restorationIdentifier! == "Movies") ? [8.75, -150] : [-8.75, 150]
+        let color = CGColor.init(srgbRed: 101/255, green: 155/255, blue: 145/255, alpha: 1.0)
+        UIView.animate(withDuration: 0.5, delay: 0, options: .curveLinear, animations: {
+            if(self.thingsToDo.contains(tappedImage.restorationIdentifier!)){
+                tappedImage.transform = CGAffineTransform(translationX: translation[0], y: 0)
+                tappedImage.layer.borderWidth = 0
+                self.thingsToDo.remove(object: tappedImage.restorationIdentifier!)
+            }else{
+                tappedImage.transform = CGAffineTransform(translationX: translation[1], y: 0)
+                tappedImage.layer.borderWidth = 3.0
+                tappedImage.layer.borderColor = color
+                self.thingsToDo.append(tappedImage.restorationIdentifier!)
+            }
+        })
     }
 
     override func viewDidAppear(_ animated: Bool) {
