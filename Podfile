@@ -6,7 +6,7 @@ target 'BK' do
 
   # Pods for BK
 #  source 'https://github.com/CocoaPods/Specs.git'
-#  use_frameworks!
+  use_frameworks!
 #  pod 'SwiftyGif'
 
   target 'BKTests' do

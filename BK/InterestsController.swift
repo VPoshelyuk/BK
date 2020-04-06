@@ -21,15 +21,8 @@ class InterestsController: UIViewController, UIScrollViewDelegate {
 
     
     var thingsToDo: [String] = []
-    var genres: [String] = ["Action", "Adventure", "Comedy", "Crime", "Drama", "Fantasy", "Historical", "Horror", "Mystery", "Philosophical", "Political", "Romance", "Saga", "Science fiction", "Social", "Thriller", "Urban", "Western"]
+    var genres: [String] = ["Action", "Adventure", "Comedy", "Crime", "Drama", "Fantasy", "Historical", "Horror", "Mystery", "Political", "Romance", "Science fiction", "Social", "Thriller", "Urban", "Western"]
     var frame = CGRect(x: 0, y: 0, width: 0, height: 0)
-
-    fileprivate func randButtonPlacement() -> Array<CGFloat> {
-        var xPos = (CGFloat(arc4random_uniform(UInt32((self.view?.frame.size.width)!))))
-        var yPos = (CGFloat(arc4random_uniform(UInt32((self.view?.frame.size.height)!))))
-        print(xPos,yPos)
-        return [xPos,yPos]
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,10 +38,9 @@ class InterestsController: UIViewController, UIScrollViewDelegate {
             let pickView = UIView(frame: frame)
             for j in 0..<genres.count {
                 let button = UIButton(type: UIButton.ButtonType.system)
-                let placement = randButtonPlacement()
-                button.frame = CGRect(x: placement[0], y: placement[1], width: 80, height: 80)
+                button.frame = CGRect(x: Int(view.frame.size.width)/4 * (j%4) + Int.random(in: 1...10), y: Int(scrollView.frame.size.height)/4 * Int(j/4) + Int.random(in: 1...40), width: 80, height: 80)
                 button.setBackgroundImage(UIImage(named: "selectionBubble"), for: UIControl.State.normal)
-//                button.addTarget(self, action: "buttonAction", for: UIControl.Event.touchUpInside)
+                button.addTarget(self, action: #selector(buttonAction), for: UIControl.Event.touchUpInside)
                 button.setTitle(genres[j], for: UIControl.State.normal)
                 button.setTitleColor(UIColor.red, for: UIControl.State.normal)
                 button.titleLabel?.font = .systemFont(ofSize: 20)
@@ -61,6 +53,11 @@ class InterestsController: UIViewController, UIScrollViewDelegate {
         }
         scrollView.contentSize = CGSize(width: (scrollView.frame.size.width * CGFloat(pCount)), height: (scrollView.frame.size.height))
         scrollView.delegate = self
+    }
+    
+    @objc func buttonAction(sender: UIButton) {
+        let newSize = CGFloat(sender.frame.size.width * 1.1)
+        sender.frame = CGRect(x: sender.frame.minX, y: sender.frame.minY, width: newSize, height: newSize)
     }
 
     override func viewDidAppear(_ animated: Bool) {
