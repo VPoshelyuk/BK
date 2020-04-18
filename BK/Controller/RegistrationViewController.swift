@@ -47,6 +47,7 @@ class RegistrationViewController: UIViewController, PoiViewDataSource, PoiViewDe
         super.viewDidLoad()
         signUpManager.delegate = self
         signUpManager.fetchSignUp("movies")
+        cardView.delegate = self
     }
     
     func didUpdateSignUp(_ SignUpManager: SignUpManager, SignUp: [SignUpModel]) {
@@ -55,9 +56,10 @@ class RegistrationViewController: UIViewController, PoiViewDataSource, PoiViewDe
             for i in self.prefArray {
                 let card = UIView(frame: CGRect(x: 20, y: 113, width: 374, height: 634))
 
-                let title = UILabel(frame: CGRect(x: 0, y: 534, width: 354, height: 30))
+                let title = UILabel(frame: CGRect(x: 0, y: 424, width: 354, height: 140))
                 title.text = i.title
                 title.textColor = UIColor(red: 239/255, green: 250/255, blue: 211/255, alpha: 1)
+                title.numberOfLines = 0
                 title.textAlignment = .right
                 title.font = UIFont(name: "gidole", size: 30)
 
@@ -73,7 +75,7 @@ class RegistrationViewController: UIViewController, PoiViewDataSource, PoiViewDe
                 year.textAlignment = .right
                 year.font = UIFont(name: "gidole", size: 18)
 
-                let imageURL: URL = URL(string: "http://image.tmdb.org/t/p/w500/\(i.poster_path)")!
+                let imageURL: URL = URL(string: "https://image.tmdb.org/t/p/w500/\(i.poster_path)")!
                 (URLSession(configuration: URLSessionConfiguration.default)).dataTask(with: imageURL, completionHandler: { (imageData, response, error) in
 
                     if let data = imageData {
@@ -101,7 +103,6 @@ class RegistrationViewController: UIViewController, PoiViewDataSource, PoiViewDe
                 self.sampleCards.append(card)
             }
             self.cardView.dataSource = self
-            self.cardView.delegate = self
         }
     }
 
