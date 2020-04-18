@@ -1,0 +1,6 @@
+module Poi {
+  umbrella header "Poi-umbrella.h"
+
+  export *
+  module * { export * }
+}
