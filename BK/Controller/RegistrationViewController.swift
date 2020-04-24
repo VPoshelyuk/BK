@@ -38,10 +38,18 @@ import Poi
 class RegistrationViewController: UIViewController, PoiViewDataSource, PoiViewDelegate, SignUpManagerDelegate {
     
     @IBOutlet weak var cardView: PoiView!
-
+    @IBAction func dislikeBtn(_ sender: UIButton) {
+        cardView.swipeCurrentCard(to: .left)
+    }
+    @IBAction func likeBtn(_ sender: UIButton) {
+        cardView.swipeCurrentCard(to: .right)
+    }
+    
     var signUpManager = SignUpManager()
     var prefArray: [SignUpModel] = []
     var sampleCards = [UIView]()
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,11 +65,9 @@ class RegistrationViewController: UIViewController, PoiViewDataSource, PoiViewDe
                 let card = UIView(frame: CGRect(x: 20, y: 113, width: 374, height: 634))
 
                 let title = UILabel(frame: CGRect(x: 0, y: 424, width: 354, height: 140))
-                title.text = i.title
-                title.textColor = UIColor(red: 239/255, green: 250/255, blue: 211/255, alpha: 1)
+                title.attributedText = self.outline(string: i.title, font: "gidole", size: 30, outlineSize: 3, textColor: UIColor(red: 239/255, green: 250/255, blue: 211/255, alpha: 1), outlineColor: .orange)
                 title.numberOfLines = 0
                 title.textAlignment = .right
-                title.font = UIFont(name: "gidole", size: 30)
 
                 let genre = UILabel(frame: CGRect(x: 0, y: 564, width: 354, height: 20))
                 genre.text = i.title
@@ -143,4 +149,24 @@ class RegistrationViewController: UIViewController, PoiViewDataSource, PoiViewDe
             return UIImageView(image: #imageLiteral(resourceName: "1aDay"))
         }
     }
+
+    
+    
+    
+    func outline(string:String, font:String, size:CGFloat, outlineSize:Float, textColor:UIColor, outlineColor:UIColor) -> NSMutableAttributedString {
+        return NSMutableAttributedString(string:string,
+                                         attributes: outlineAttributes(font: UIFont(name: font, size: size)!,
+                                                            outlineSize: outlineSize, textColor: textColor, outlineColor: outlineColor))
+    }
+
+    func outlineAttributes(font: UIFont, outlineSize: Float, textColor: UIColor, outlineColor: UIColor) -> [NSAttributedString.Key: Any]{
+        return [
+            NSAttributedString.Key.strokeColor : outlineColor,
+            NSAttributedString.Key.foregroundColor : textColor,
+            NSAttributedString.Key.strokeWidth : -outlineSize,
+            NSAttributedString.Key.font : font
+        ]
+    }
+    
+    
 }

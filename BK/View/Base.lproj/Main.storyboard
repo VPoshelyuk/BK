@@ -359,6 +359,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <action selector="dislikeBtn:" destination="QTJ-PK-I2i" eventType="touchUpInside" id="Vzr-1t-vH4"/>
                                     <action selector="interestPicked:" destination="O1h-xy-mBP" eventType="touchUpInside" id="pTD-z9-TKX"/>
                                 </connections>
                             </button>
@@ -394,6 +395,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="interestPicked:" destination="O1h-xy-mBP" eventType="touchUpInside" id="xge-3A-a2f"/>
+                                    <action selector="likeBtn:" destination="QTJ-PK-I2i" eventType="touchUpInside" id="xfy-gQ-AvP"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sz0-b7-Zhc">
