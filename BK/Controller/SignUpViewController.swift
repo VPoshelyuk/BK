@@ -31,7 +31,18 @@ class SignUpViewController: UIViewController {
         for pref in preferenceArray {
             var genreDictionary = [String: Int]()
             if pref == "Games" {
-        
+                genreDictionary = [
+                    "13": 0,
+                    "24": 0,
+                    "26": 0,
+                    "4": 0,
+                    "15": 0,
+                    "31": 0,
+                    "12": 0,
+                    "5": 0,
+                    "7": 0,
+                    "32": 0
+                ]
             }else{
                 genreDictionary = [
                     "28": 0,
@@ -86,17 +97,25 @@ class SignUpViewController: UIViewController {
         if sender.backgroundColor == UIColor(red: 248/255, green: 174/255, blue: 52/255, alpha: 1){
             sender.setTitleColor(.black, for: .normal)
             sender.backgroundColor = .white
-            preferenceArray.remove(object: sender.title(for: .normal)!)
+            preferenceArray.remove(object: sender.title(for: .normal)!.removingWhitespaces().lowercased())
         }else{
             sender.setTitleColor(UIColor(red: 239/255, green: 250/255, blue: 211/255, alpha: 1), for: .normal)
             sender.backgroundColor = UIColor(red: 248/255, green: 174/255, blue: 52/255, alpha: 1)
-            preferenceArray.append(sender.title(for: .normal)!)
+            preferenceArray.append(sender.title(for: .normal)!.removingWhitespaces().lowercased())
         }
+        print(preferenceArray)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toPref" {
+            let destinationVC = segue.destination as! RegistrationViewController
+            destinationVC.interestsArr = preferenceArray
+        }
     }
 }
 
@@ -116,5 +135,11 @@ extension Array where Element: Equatable {
     mutating func remove(object: Element) {
         guard let index = firstIndex(of: object) else {return}
         remove(at: index)
+    }
+}
+
+extension String {
+    func removingWhitespaces() -> String {
+        return components(separatedBy: .whitespaces).joined()
     }
 }

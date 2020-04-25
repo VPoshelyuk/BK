@@ -14,14 +14,19 @@ protocol SignUpManagerDelegate {
 }
 
 struct SignUpManager {
-    let SignUpURL = "http://localhost:3000/api/v1/"
+    let SignUpURL = "https://preference-api.herokuapp.com/api/v1/"
     
     
     var delegate: SignUpManagerDelegate?
     
-    func fetchSignUp(_ typeName: String) {
-        let urlString = "\(SignUpURL)/\(typeName)"
-        performRequest(with: urlString)
+    var count = 0
+    
+    mutating func fetchSignUp(_ typeNames: Array<String>) {
+        count = typeNames.count
+        for typeName in typeNames {
+            let urlString = "\(SignUpURL)/\(typeName)"
+            performRequest(with: urlString)
+        }
     }
     func performRequest(with urlString: String) {
         if let url = URL(string: urlString) {

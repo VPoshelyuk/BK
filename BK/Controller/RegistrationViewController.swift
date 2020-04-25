@@ -9,32 +9,6 @@
 import UIKit
 import Poi
 
-//class RegistrationViewController: UIViewController, SignUpManagerDelegate {
-//
-//    @IBOutlet weak var cardView: PoiView!
-//
-//    var signUpManager = SignUpManager()
-//    var prefArray: [SignUpModel] = []
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        signUpManager.delegate = self
-//        signUpManager.fetchSignUp("movies")
-//    }
-//
-//    func didUpdateSignUp(_ SignUpManager: SignUpManager, SignUp: [SignUpModel]) {
-//        DispatchQueue.main.async {
-//            self.prefArray = SignUp
-//            print(self.prefArray)
-//        }
-//    }
-//
-//    func didFailWithError(error: Error) {
-//        print(error)
-//    }
-//}
-
-
 class RegistrationViewController: UIViewController, PoiViewDataSource, PoiViewDelegate, SignUpManagerDelegate {
     
     @IBOutlet weak var cardView: PoiView!
@@ -48,17 +22,19 @@ class RegistrationViewController: UIViewController, PoiViewDataSource, PoiViewDe
     var signUpManager = SignUpManager()
     var prefArray: [SignUpModel] = []
     var sampleCards = [UIView]()
-    
+    var interestsArr:[String] = []
+    var count = 0
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         signUpManager.delegate = self
-        signUpManager.fetchSignUp("movies")
+            signUpManager.fetchSignUp(interestsArr)
         cardView.delegate = self
     }
     
     func didUpdateSignUp(_ SignUpManager: SignUpManager, SignUp: [SignUpModel]) {
+        count += 1
         DispatchQueue.main.async {
             self.prefArray = SignUp
             for i in self.prefArray {
@@ -108,7 +84,9 @@ class RegistrationViewController: UIViewController, PoiViewDataSource, PoiViewDe
                 card.layer.cornerRadius = 15
                 self.sampleCards.append(card)
             }
-            self.cardView.dataSource = self
+            print(SignUpManager.count, "ddsjkfldshgd")
+            print(self.count, "eeeeeeee")
+            if self.count == SignUpManager.count {self.cardView.dataSource = self}
         }
     }
 
@@ -120,7 +98,6 @@ class RegistrationViewController: UIViewController, PoiViewDataSource, PoiViewDe
     
     
     func numberOfCards(_ poi: PoiView) -> Int {
-        print(sampleCards)
         return sampleCards.count
     }
 
