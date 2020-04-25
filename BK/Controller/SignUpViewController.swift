@@ -8,10 +8,12 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 
 class SignUpViewController: UIViewController {
     
     var preferenceArray: [String] = []
+    var preferenceDictionary = [String: Any]()
     
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
@@ -26,6 +28,32 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signUpClicked(_ sender: UIButton) {
+        for pref in preferenceArray {
+            var genreDictionary = [String: Int]()
+            if pref == "Games" {
+        
+            }else{
+                genreDictionary = [
+                    "28": 0,
+                    "12": 0,
+                    "16": 0,
+                    "35": 0,
+                    "80": 0,
+                    "99": 0,
+                    "18": 0,
+                    "10751": 0,
+                    "36": 0,
+                    "27": 0,
+                    "10402": 0,
+                    "10749": 0,
+                    "878": 0,
+                    "53": 0,
+                    "10752": 0,
+                    "37": 0
+                ]
+            }
+            preferenceDictionary[pref] = ["genres": genreDictionary, "seen": [0]]
+        }
         if let email  = emailTF.text, let password  = passwordTF.text {
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
                 if let e = error {
@@ -38,7 +66,7 @@ class SignUpViewController: UIViewController {
                     let dict: Dictionary <String, Any> = [
                         "uid" : authData.user.uid,
                         "email" : authData.user.email as Any,
-                        "preferences" : self.preferenceArray
+                        "preferences" : self.preferenceDictionary
                     ]
                     
                     Database.database().reference().child("users").child(authData.user.uid).updateChildValues(dict, withCompletionBlock: {
