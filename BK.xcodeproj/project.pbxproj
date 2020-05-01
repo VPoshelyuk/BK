@@ -25,6 +25,7 @@
 		E7AD2D61242724BB00CEC9A0 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AD2D60242724BB00CEC9A0 /* SignUpViewController.swift */; };
 		E7AD2D63242724CE00CEC9A0 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AD2D62242724CE00CEC9A0 /* LogInViewController.swift */; };
 		E7AD2D652427354200CEC9A0 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AD2D642427354200CEC9A0 /* RegistrationViewController.swift */; };
+		E7D74E67245CBD0000F974B7 /* ShowData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D74E66245CBD0000F974B7 /* ShowData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		E7AD2D60242724BB00CEC9A0 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		E7AD2D62242724CE00CEC9A0 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		E7AD2D642427354200CEC9A0 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		E7D74E66245CBD0000F974B7 /* ShowData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowData.swift; sourceTree = "<group>"; };
 		F9B2AD0A4215B0C8DBF622CA /* Pods-BK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BK.release.xcconfig"; path = "Target Support Files/Pods-BK/Pods-BK.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -172,6 +174,7 @@
 				E73E200A244B8DB300EFFCB3 /* MovieData.swift */,
 				E73E200C244B90F800EFFCB3 /* SignUpManager.swift */,
 				E73E200F244B91D300EFFCB3 /* SignUpModel.swift */,
+				E7D74E66245CBD0000F974B7 /* ShowData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				E77F382C2426B0F50032D191 /* BK.xcdatamodeld in Sources */,
 				E73E200B244B8DB300EFFCB3 /* MovieData.swift in Sources */,
 				E77F38262426B0F50032D191 /* PresentViewController.swift in Sources */,
+				E7D74E67245CBD0000F974B7 /* ShowData.swift in Sources */,
 				E77F38222426B0F50032D191 /* AppDelegate.swift in Sources */,
 				E73E200D244B90F800EFFCB3 /* SignUpManager.swift in Sources */,
 				E73E2010244B91D300EFFCB3 /* SignUpModel.swift in Sources */,

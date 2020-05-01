@@ -29,7 +29,7 @@ class RegistrationViewController: UIViewController, PoiViewDataSource, PoiViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         signUpManager.delegate = self
-            signUpManager.fetchSignUp(interestsArr)
+        signUpManager.fetchSignUp(interestsArr)
         cardView.delegate = self
     }
     
@@ -84,9 +84,8 @@ class RegistrationViewController: UIViewController, PoiViewDataSource, PoiViewDe
                 card.layer.cornerRadius = 15
                 self.sampleCards.append(card)
             }
-            print(SignUpManager.count, "ddsjkfldshgd")
-            print(self.count, "eeeeeeee")
-            if self.count == SignUpManager.count {self.cardView.dataSource = self}
+            print(SignUpManager.count, "ddsjkfldshgd", self.count)
+            if self.count == SignUpManager.count {self.cardView.dataSource = self; print(self.sampleCards.count)}
         }
     }
 

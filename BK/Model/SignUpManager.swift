@@ -25,10 +25,11 @@ struct SignUpManager {
         count = typeNames.count
         for typeName in typeNames {
             let urlString = "\(SignUpURL)/\(typeName)"
-            performRequest(with: urlString)
+            performRequest(with: urlString, typeName: typeName)
         }
     }
-    func performRequest(with urlString: String) {
+    
+    func performRequest(with urlString: String, typeName: String) {
         if let url = URL(string: urlString) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url, completionHandler: {
@@ -38,7 +39,7 @@ struct SignUpManager {
                 }
                 
                 if let safeData = $0 {
-                    if let SignUp = self.parseJSON(safeData) {
+                    if let SignUp = self.parseJSON(safeData, typeName: typeName) {
                         self.delegate?.didUpdateSignUp(self, SignUp: SignUp)
                     }
                 }
@@ -47,15 +48,30 @@ struct SignUpManager {
         }
     }
     
-    func parseJSON(_ signUpData: Data) -> [SignUpModel]? {
+    func parseJSON(_ signUpData: Data, typeName: String) -> [SignUpModel]? {
         let decoder = JSONDecoder()
-        var movies = [SignUpModel]()
+        var interest = [SignUpModel]()
         do {
-            let decodedData = try decoder.decode(Array<MovieData>.self, from: signUpData)
-            for i in decodedData {
-                movies.append(SignUpModel(externalId: i.tmdb_id, title: i.title, poster_path: i.poster_path,backdrop_path: i.backdrop_path, overview: i.overview, release_date: i.release_date, genre_ids: i.genre_ids))
+            switch typeName {
+            case "movies":
+                let decodedData = try decoder.decode(Array<MovieData>.self, from: signUpData)
+                for i in decodedData {
+                    interest.append(SignUpModel(externalId: i.tmdb_id, title: i.title, poster_path: i.poster_path,backdrop_path: i.backdrop_path, overview: i.overview, release_date: i.release_date, genre_ids: i.genre_ids))
+                }
+            case "tvshows":
+                let decodedData = try decoder.decode(Array<ShowData>.self, from: signUpData)
+                for i in decodedData {
+                    interest.append(SignUpModel(externalId: i.tmdb_id, title: i.name, poster_path: i.poster_path,backdrop_path: i.backdrop_path, overview: i.overview, release_date: i.first_air_date, genre_ids: i.genre_ids))
+                }
+//            case "games":
+//                let decodedData = try decoder.decode(Array<ShowData>.self, from: signUpData)
+//                for i in decodedData {
+//                    interest.append(SignUpModel(externalId: i.tmdb_id, title: i.name, poster_path: i.poster_path,backdrop_path: i.backdrop_path, overview: i.overview, release_date: i.first_air_date, genre_ids: i.genre_ids))
+//                }
+            default:
+                print("Error occurred")
             }
-            return movies
+            return interest
         }catch{
             delegate?.didFailWithError(error: error)
             return nil
